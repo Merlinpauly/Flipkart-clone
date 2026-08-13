@@ -1,20 +1,18 @@
-import Header from './components/Header';
-import CategoryNav from './components/CategoryNav';
-import Banner from './components/Banner';
-import ProductSection from './components/ProductSection';
-import { products } from './data/products';
+import Home from "./pages/Home";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+
 function App() {
   return (
     <>
-      <Header />
-      <CategoryNav />
-      <Banner />
-      <ProductSection
-        title="Popular Picks"
-        products={products}
-      />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
     </>
-
   );
 }
+
 export default App;
