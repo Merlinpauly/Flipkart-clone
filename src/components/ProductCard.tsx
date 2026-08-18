@@ -8,8 +8,8 @@ interface ProductCardProps {
 function ProductCard({ product }: ProductCardProps){
     return (
          <div className="product-card">
-            <img src={product.image} alt={product.name}/>
-            <h3>{product.name}</h3>
+            <img src={product.thumbnail} alt={product.title}/>
+            <h3>{product.title}</h3>
             <p>₹{product.price}</p>
             <span>{product.category}</span>
 
