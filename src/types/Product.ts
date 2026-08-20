@@ -5,4 +5,5 @@ export interface Product {
     category: string;
     thumbnail: string;
     rating: number;
+    discountPercentage: number;
 }
