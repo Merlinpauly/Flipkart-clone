@@ -10,12 +10,20 @@ function CategoryNav() {
 
       <div className="category-item">
         <span className="category-icon">👕</span>
-        <span>Fashion</span>
+        <span>Men</span>
         <div className="dropdown-menu">
-          <p>Men's Clothing</p>
+          <Link to="/men Clothing">Men's Clothing</Link>
+          <Link to="/men shoes">Men's Shoes</Link>
+          <Link to="/men watches">Men's Watches</Link>
+        </div>
+      </div>
+      <div className="category-item">
+        <span className="category-icon">👕</span>
+        <span>Women</span>
+        <div className="dropdown-menu">
           <p>Women's Clothing</p>
           <p>Shoes</p>
-          <p>Accessories</p>
+          <p>Watches</p>
         </div>
       </div>
       <div className="category-item">
@@ -34,10 +42,7 @@ function CategoryNav() {
         <span className="category-icon"> 💄</span>
         <span>Beauty</span>
       </div>
-      <div className="category-item">
-        <span className="category-icon">📱</span>
-        <span>Mobiles</span>
-      </div>
+      
       <div className="category-item">
         <span className="category-icon">✈️</span>
         <span>Travel</span>
