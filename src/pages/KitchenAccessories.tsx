@@ -1,30 +1,29 @@
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 import type { Product } from "../types/Product";
 import CategoryLayout from "../components/CategoryLayout";
 import ProductCard from "../components/ProductCard";
 
-function MenWatches() {
-  const [menwatch, setMenWatch] = useState<Product[]>([]);
-
+function KitchenAccessories() {
+  const [kitchenAccessories, setKitchenAccessories] = useState<Product[]>([]);
   useEffect(() => {
-    async function getMenWatches() {
+    async function getKitchenAccessories() {
       const response = await fetch("https://dummyjson.com/products?limit=0");
       const data = await response.json();
-
-      const menwatch = data.products.filter( 
-        (product: Product) => product.category === "mens-watches",);
-      setMenWatch(menwatch);
+      const kitchenAccessories = data.products.filter(
+        (product: Product) => product.category === "kitchen-accessories",
+      );
+      setKitchenAccessories(kitchenAccessories);
     }
-    getMenWatches();
+    getKitchenAccessories();
   }, []);
 
   return (
     <>
       <Header />
       <CategoryLayout
-        title="Men's Watches"
+        title="Kitchen Accessories"
         filters={
           <>
             <h3>Filters</h3>
@@ -33,21 +32,38 @@ function MenWatches() {
 
             <input type="range" min="0" max="100000" />
 
-            <h4>Brand</h4>
+            <h4>Category</h4>
 
             <label>
               <input type="checkbox" />
-              Rolex
+              Kitchen Tools
             </label>
 
             <label>
               <input type="checkbox" />
-              Fossil
+              Cookware
             </label>
 
             <label>
               <input type="checkbox" />
-              Casio
+              Storage
+            </label>
+
+            <h4>Material</h4>
+
+            <label>
+              <input type="checkbox" />
+              Stainless Steel
+            </label>
+
+            <label>
+              <input type="checkbox" />
+              Plastic
+            </label>
+
+            <label>
+              <input type="checkbox" />
+              Wood
             </label>
 
             <h4>Rating</h4>
@@ -60,7 +76,7 @@ function MenWatches() {
         }
       >
         <div className="mobile-product-list">
-          {menwatch.map((product) => (
+          {kitchenAccessories.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
@@ -71,4 +87,4 @@ function MenWatches() {
   );
 }
 
-export default MenWatches;
+export default KitchenAccessories;

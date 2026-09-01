@@ -1,30 +1,30 @@
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
-import type { Product } from "../types/Product";
 import CategoryLayout from "../components/CategoryLayout";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
+import type { Product } from "../types/Product";
 import ProductCard from "../components/ProductCard";
 
-function MenWatches() {
-  const [menwatch, setMenWatch] = useState<Product[]>([]);
+function WomenClothing() {
+  const [womenClothing, setWomenClothing] = useState<Product[]>([]);
 
   useEffect(() => {
-    async function getMenWatches() {
+    async function getWomenClothing() {
       const response = await fetch("https://dummyjson.com/products?limit=0");
       const data = await response.json();
-
-      const menwatch = data.products.filter( 
-        (product: Product) => product.category === "mens-watches",);
-      setMenWatch(menwatch);
+      const womenclothing = data.products.filter(
+        (product: Product) => product.category === "womens-dresses",
+      );
+      setWomenClothing(womenclothing);
     }
-    getMenWatches();
+    getWomenClothing();
   }, []);
 
   return (
     <>
       <Header />
       <CategoryLayout
-        title="Men's Watches"
+        title="Women's Clothing"
         filters={
           <>
             <h3>Filters</h3>
@@ -37,17 +37,31 @@ function MenWatches() {
 
             <label>
               <input type="checkbox" />
-              Rolex
+              Gucci
             </label>
 
             <label>
               <input type="checkbox" />
-              Fossil
+              Chanel
             </label>
 
             <label>
               <input type="checkbox" />
-              Casio
+              Prada
+            </label>
+
+            <h4>Size</h4>
+
+            <label>
+              <input type="checkbox" />S
+            </label>
+
+            <label>
+              <input type="checkbox" />M
+            </label>
+
+            <label>
+              <input type="checkbox" />L
             </label>
 
             <h4>Rating</h4>
@@ -60,7 +74,7 @@ function MenWatches() {
         }
       >
         <div className="mobile-product-list">
-          {menwatch.map((product) => (
+          {womenClothing.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
@@ -70,5 +84,4 @@ function MenWatches() {
     </>
   );
 }
-
-export default MenWatches;
+export default WomenClothing;

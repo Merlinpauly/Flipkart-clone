@@ -1,30 +1,31 @@
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import { useEffect, useState } from "react";
-import type { Product } from "../types/Product";
 import CategoryLayout from "../components/CategoryLayout";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 import ProductCard from "../components/ProductCard";
+import type { Product } from "../types/Product";
+import { useEffect, useState } from "react";
 
-function MenWatches() {
-  const [menwatch, setMenWatch] = useState<Product[]>([]);
+function Makeup() {
+  const [makeup, setMakeup] = useState<Product[]>([]);
 
   useEffect(() => {
-    async function getMenWatches() {
+    async function getMakeup() {
       const response = await fetch("https://dummyjson.com/products?limit=0");
       const data = await response.json();
+      const makeup = data.products.filter(
+        (product: Product) => product.category === "beauty",
+      );
 
-      const menwatch = data.products.filter( 
-        (product: Product) => product.category === "mens-watches",);
-      setMenWatch(menwatch);
+      setMakeup(makeup);
     }
-    getMenWatches();
+    getMakeup();
   }, []);
 
   return (
     <>
       <Header />
       <CategoryLayout
-        title="Men's Watches"
+        title="Makeup"
         filters={
           <>
             <h3>Filters</h3>
@@ -37,17 +38,34 @@ function MenWatches() {
 
             <label>
               <input type="checkbox" />
-              Rolex
+              Essence
             </label>
 
             <label>
               <input type="checkbox" />
-              Fossil
+              Maybelline
             </label>
 
             <label>
               <input type="checkbox" />
-              Casio
+              L'Oréal
+            </label>
+
+            <h4>Category</h4>
+
+            <label>
+              <input type="checkbox" />
+              Lipstick
+            </label>
+
+            <label>
+              <input type="checkbox" />
+              Foundation
+            </label>
+
+            <label>
+              <input type="checkbox" />
+              Eyeshadow
             </label>
 
             <h4>Rating</h4>
@@ -60,15 +78,14 @@ function MenWatches() {
         }
       >
         <div className="mobile-product-list">
-          {menwatch.map((product) => (
+          {makeup.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
       </CategoryLayout>
-
       <Footer />
     </>
   );
 }
 
-export default MenWatches;
+export default Makeup;

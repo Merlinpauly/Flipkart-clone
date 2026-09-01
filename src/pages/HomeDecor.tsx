@@ -1,30 +1,30 @@
-import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Header from "../components/Header";
 import { useEffect, useState } from "react";
 import type { Product } from "../types/Product";
 import CategoryLayout from "../components/CategoryLayout";
 import ProductCard from "../components/ProductCard";
 
-function MenWatches() {
-  const [menwatch, setMenWatch] = useState<Product[]>([]);
+function HomeDecor() {
+  const [homeDecor, setHomeDecor] = useState<Product[]>([]);
 
   useEffect(() => {
-    async function getMenWatches() {
+    async function getHomeDeccor() {
       const response = await fetch("https://dummyjson.com/products?limit=0");
       const data = await response.json();
-
-      const menwatch = data.products.filter( 
-        (product: Product) => product.category === "mens-watches",);
-      setMenWatch(menwatch);
+      const homeDecor = data.products.filter(
+        (product: Product) => product.category === "home-decoration",
+      );
+      setHomeDecor(homeDecor);
     }
-    getMenWatches();
+    getHomeDeccor();
   }, []);
 
   return (
     <>
       <Header />
       <CategoryLayout
-        title="Men's Watches"
+        title="Home Decor"
         filters={
           <>
             <h3>Filters</h3>
@@ -33,22 +33,39 @@ function MenWatches() {
 
             <input type="range" min="0" max="100000" />
 
-            <h4>Brand</h4>
+            {/* <h4>Category</h4>
 
             <label>
               <input type="checkbox" />
-              Rolex
+              Wall Decor
             </label>
 
             <label>
               <input type="checkbox" />
-              Fossil
+              Lighting
             </label>
 
             <label>
               <input type="checkbox" />
-              Casio
+              Furniture
             </label>
+
+            <h4>Material</h4>
+
+            <label>
+              <input type="checkbox" />
+              Wood
+            </label>
+
+            <label>
+              <input type="checkbox" />
+              Metal
+            </label>
+
+            <label>
+              <input type="checkbox" />
+              Glass
+            </label> */}
 
             <h4>Rating</h4>
 
@@ -60,7 +77,7 @@ function MenWatches() {
         }
       >
         <div className="mobile-product-list">
-          {menwatch.map((product) => (
+          {homeDecor.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
@@ -71,4 +88,4 @@ function MenWatches() {
   );
 }
 
-export default MenWatches;
+export default HomeDecor;

@@ -29,6 +29,28 @@ function Footer() {
                 <p>Instagram</p>
                 <p>YouTube</p>
             </div>
+
+            <div className="footer-section">
+                <h4>Mail Us:</h4>
+                <p>Flipkart Internet Private Limited,</p>
+                <p>Buildings Alyssa, Begonia &</p>
+                <p>Clove Embassy Tech Village,</p>
+                <p>Outer Ring Road, Devarabeesanahalli Village,</p>
+                <p>Bengaluru, 560103, Karnataka, India</p>  
+            </div>
+
+            <div className="footer-section">
+                <h4>Registered Office Address:</h4>
+                <p>Flipkart Internet Private Limited,</p>
+                <p>Buildings Alyssa, Begonia &</p>
+                <p>Clove Embassy Tech Village,</p>
+                <p>Outer Ring Road, Devarabeesanahalli Village,</p>
+                <p>Bengaluru, 560103, Karnataka, India</p>
+                <p>CIN : U51109KA2012PTC066107</p>
+                <p>Telephone: 1800 202 9898</p>
+            </div>
+
+
         </footer>
     );
 }
