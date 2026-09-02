@@ -30,7 +30,7 @@ function Footer() {
                 <p>YouTube</p>
             </div>
 
-            <div className="footer-section">
+            <div className="footer-section" >
                 <h4>Mail Us:</h4>
                 <p>Flipkart Internet Private Limited,</p>
                 <p>Buildings Alyssa, Begonia &</p>

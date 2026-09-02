@@ -1,5 +1,6 @@
 import type { Product } from "../types/Product";
 import "../styles/index.css";
+import { Link } from "react-router-dom";
 
 interface ProductCardProps {
   product: Product;
@@ -7,14 +8,17 @@ interface ProductCardProps {
 // this interface means , the productcard receives props called product , that product follow the Product rules means type check
 function ProductCard({ product }: ProductCardProps) {
   return (
-    <div className="product-card">
-      <img src={product.thumbnail} alt={product.title} />
-      <h3>{product.title}</h3>
-      <p>${product.price}</p>
-      <span>⭐ {product.rating}</span><br/>
-      <small>{product.discountPercentage}% off</small>
-      <button className="add-cart-btn">Add to Cart</button>
-    </div>
+    <Link to={`/product/${product.id}`} className="product-card-link">
+      <div className="product-card">
+        <img src={product.thumbnail} alt={product.title} />
+        <h3>{product.title}</h3>
+        <p>${product.price}</p>
+        <span>⭐ {product.rating}</span>
+        <br />
+        <small>{product.discountPercentage}% off</small>
+        <button className="add-cart-btn">Add to Cart</button>
+      </div>
+    </Link>
   );
 }
 export default ProductCard;

@@ -11,7 +11,7 @@ function Header() {
       >
         Login
       </button>
-      <div className="cart">Cart</div>
+      <div className="cart">🛒Cart</div>
     </header>
   );
 }
