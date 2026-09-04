@@ -8,6 +8,7 @@ function ProductDetails() {
   const { id } = useParams();
 
   const [product, setProduct] = useState<Product | null>(null);
+  const [cart, setCart] = useState<Product[]>([]);
 
   useEffect(() => {
     async function getProduct() {
@@ -22,43 +23,45 @@ function ProductDetails() {
   }, [id]);
 
   console.log(product);
+  const addToCart = () => {
+    if (product) {
+      setCart([...cart, product]);
+    }
+  };
 
   return (
     <>
-    <Header />
-    <div className="product-details">
-      {product && (
-        <>
-          {/* Product Image */}
-          <div className="product-image">
-            <img src={product.thumbnail} alt={product.title} />
-          </div>
+      <Header />
+      <div className="product-details">
+        {product && (
+          <>
+            <div className="product-image">
+              <img src={product.thumbnail} alt={product.title} />
+            </div>
 
-          
-          <div className="product-info">
+            <div className="product-info">
+              <h1>{product.title}</h1>
 
-            <h1>{product.title}</h1>
+              <p>{product.description}</p>
 
-            <p>{product.description}</p>
+              <p>⭐ {product.rating}</p>
 
-            <p>⭐ {product.rating}</p>
+              <h2>₹{product.price}</h2>
 
-            <h2>₹{product.price}</h2>
+              <p>Stock: {product.stock}</p>
 
-            <p>Stock: {product.stock}</p>
+              <p>Brand: {product.brand}</p>
 
-            <p>Brand: {product.brand}</p>
+              <p>Reviews: {product.reviews.length}</p>
+              <button className="add-to-cart" onClick={addToCart}>
+                🛒 Add to Cart
+              </button>
+            </div>
+          </>
+        )}
+      </div>
 
-            <p>Reviews: {product.reviews.length}</p>
-
-            
-          </div>
-
-        </>
-      )} 
-    </div>
-    
-    <Footer />
+      <Footer />
     </>
   );
 }

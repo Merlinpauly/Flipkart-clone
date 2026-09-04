@@ -20,6 +20,7 @@ import KitchenAccessories from "./pages/KitchenAccessories";
 import SportsAccessories from "./pages/SportsAccessories";
 import TwoWheelers from "./pages/TwoWheelers";
 import ProductDetails from "./pages/ProductDetails";
+import Cart from "./pages/Cart";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
           <Route path="/sports-accessories" element={<SportsAccessories />} />
           <Route path="/two-wheelers" element={<TwoWheelers />} />
           <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Header() {
   return (
     <header className="header">
@@ -11,7 +13,9 @@ function Header() {
       >
         Login
       </button>
-      <div className="cart">🛒Cart</div>
+      <div className="cart">
+        <Link to="/cart">🛒 Cart</Link>
+      </div>
     </header>
   );
 }
