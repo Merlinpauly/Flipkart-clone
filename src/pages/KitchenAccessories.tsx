@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
-import Header from "../components/Header";
+// import Header from "../components/Header";
 import type { Product } from "../types/Product";
 import CategoryLayout from "../components/CategoryLayout";
 import ProductCard from "../components/ProductCard";
@@ -21,7 +21,7 @@ function KitchenAccessories() {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <CategoryLayout
         title="Kitchen Accessories"
         filters={

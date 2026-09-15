@@ -1,3 +1,5 @@
+import { useState } from "react";
+import Header from "./components/Header";
 import Home from "./pages/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
@@ -23,11 +25,13 @@ import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 
 function App() {
+  const [search, setSearch] = useState("");
   return (
     <>
       <BrowserRouter>
+        <Header search={search} setSearch={setSearch} />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home search={search} />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/mobile-phones" element={<MobilePhones />} />

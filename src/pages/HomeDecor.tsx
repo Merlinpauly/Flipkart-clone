@@ -1,5 +1,5 @@
 import Footer from "../components/Footer";
-import Header from "../components/Header";
+// import Header from "../components/Header";
 import { useEffect, useState } from "react";
 import type { Product } from "../types/Product";
 import CategoryLayout from "../components/CategoryLayout";
@@ -22,7 +22,7 @@ function HomeDecor() {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <CategoryLayout
         title="Home Decor"
         filters={

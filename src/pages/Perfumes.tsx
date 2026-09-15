@@ -1,5 +1,5 @@
 import Footer from "../components/Footer"
-import Header from "../components/Header"
+// import Header from "../components/Header"
 import ProductCard from "../components/ProductCard";
 import type { Product } from "../types/Product"
 import { useEffect, useState } from "react"
@@ -24,7 +24,7 @@ function Perfumes() {
 
   return (
     <>
-    <Header/>
+    {/* <Header/> */}
     <CategoryLayout
                 title="Perfumes"
                 filters={

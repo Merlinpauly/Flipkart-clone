@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import type { Product } from "../types/Product";
-import Header from "../components/Header";
+// import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 function ProductDetails() {
@@ -31,7 +31,7 @@ function ProductDetails() {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <div className="product-details">
         {product && (
           <>

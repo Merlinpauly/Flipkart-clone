@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { Product } from "../types/Product";
 import Footer from "../components/Footer";
-import Header from "../components/Header";
+// import Header from "../components/Header";
 import "../styles/index.css";
 import ProductCard from "../components/ProductCard";
 import CategoryLayout from "../components/CategoryLayout";
@@ -22,7 +22,7 @@ function MobilePhones() {
   }, []);
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <main className="mobile-page">
         <CategoryLayout
           title="Mobile Phones"

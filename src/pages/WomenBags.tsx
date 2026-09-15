@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CategoryLayout from "../components/CategoryLayout";
 import Footer from "../components/Footer";
-import Header from "../components/Header";
+// import Header from "../components/Header";
 import type { Product } from "../types/Product";
 import ProductCard from "../components/ProductCard";
 
@@ -23,7 +23,7 @@ function WomenBags() {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <CategoryLayout
         title="Women's Bags"
         filters={

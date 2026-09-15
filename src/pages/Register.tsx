@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Header from "../components/Header";
+// import Header from "../components/Header";
 import CategoryNav from "../components/CategoryNav";
 import Footer from "../components/Footer";
 
@@ -15,7 +15,7 @@ function Register() {
   }
   return (
     <>
-        <Header/>
+        {/* <Header/> */}
         <CategoryNav/>
         <div className="register-page">
       <form className= "register-form" onSubmit={handleSubmit} >

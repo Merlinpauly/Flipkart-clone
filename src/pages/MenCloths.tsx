@@ -1,5 +1,5 @@
 import  { useState, useEffect } from "react";
-import Header from "../components/Header";
+// import Header from "../components/Header";
 import Footer from "../components/Footer";
 import type { Product } from "../types/Product";
 import CategoryLayout from "../components/CategoryLayout";
@@ -21,7 +21,7 @@ function MenCloths() {
   }, []);
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <CategoryLayout
             title="Men's Clothing"
             filters={

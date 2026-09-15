@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "../styles/index.css";
-import Header from "../components/Header";
+// import Header from "../components/Header";
 import CategoryNav from "../components/CategoryNav";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
@@ -13,7 +13,7 @@ function Login() {
   }
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <CategoryNav />
       <div className="login-page">
         <form className="login-form" onSubmit={handleSubmit}>

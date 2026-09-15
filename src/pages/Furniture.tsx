@@ -1,6 +1,6 @@
 import CategoryLayout from "../components/CategoryLayout";
 import Footer from "../components/Footer";
-import Header from "../components/Header";
+
 import ProductCard from "../components/ProductCard";
 import type { Product } from "../types/Product";
 import { useEffect, useState } from "react";
@@ -22,7 +22,7 @@ function Furniture() {
 
   return (
     <>
-      <Header />
+     
 
       <CategoryLayout
         title="Furniture"

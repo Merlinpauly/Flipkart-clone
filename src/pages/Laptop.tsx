@@ -1,5 +1,5 @@
 import Footer from "../components/Footer";
-import Header from "../components/Header";
+// import Header from "../components/Header";
 import "../styles/index.css";
 import { useState, useEffect } from "react";
 import type { Product } from "../types/Product";
@@ -25,7 +25,7 @@ function Laptop() {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <CategoryLayout
         title="Laptops"
         filters={
