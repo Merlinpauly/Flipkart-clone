@@ -4,9 +4,13 @@ import Footer from "../components/Footer";
 // import Header from "../components/Header";
 import type { Product } from "../types/Product";
 import ProductCard from "../components/ProductCard";
+import FilterSidebar from "../components/FilterSidebar";
 
 function WomenClothing() {
   const [womenClothing, setWomenClothing] = useState<Product[]>([]);
+  const [selectedBrand, setSelectedBrand] = useState("");
+
+  const [selectedMaxPrice, setSelectedMaxPrice] = useState(2000);
 
   useEffect(() => {
     async function getWomenClothing() {
@@ -19,6 +23,22 @@ function WomenClothing() {
     }
     getWomenClothing();
   }, []);
+  const brands = [
+    ...new Set(
+      womenClothing
+        .map((product) => product.brand)
+        .filter((brand): brand is string => Boolean(brand)),
+    ),
+  ];
+
+  const filteredProducts = womenClothing.filter((product) => {
+    const matchesBrand =
+      selectedBrand === "" || product.brand === selectedBrand;
+
+    const matchesPrice = product.price <= selectedMaxPrice;
+
+    return matchesBrand && matchesPrice;
+  });
 
   return (
     <>
@@ -26,55 +46,19 @@ function WomenClothing() {
       <CategoryLayout
         title="Women's Clothing"
         filters={
-          <>
-            <h3>Filters</h3>
-
-            <h4>Price</h4>
-
-            <input type="range" min="0" max="100000" />
-
-            <h4>Brand</h4>
-
-            <label>
-              <input type="checkbox" />
-              Gucci
-            </label>
-
-            <label>
-              <input type="checkbox" />
-              Chanel
-            </label>
-
-            <label>
-              <input type="checkbox" />
-              Prada
-            </label>
-
-            <h4>Size</h4>
-
-            <label>
-              <input type="checkbox" />S
-            </label>
-
-            <label>
-              <input type="checkbox" />M
-            </label>
-
-            <label>
-              <input type="checkbox" />L
-            </label>
-
-            <h4>Rating</h4>
-
-            <label>
-              <input type="checkbox" />
-              4★ & above
-            </label>
-          </>
+          <FilterSidebar
+            minPrice={200}
+            maxPrice={2000}
+            brands={brands}
+            selectedBrand={selectedBrand}
+            selectedMaxPrice={selectedMaxPrice}
+            onBrandChange={setSelectedBrand}
+            onPriceChange={setSelectedMaxPrice}
+          />
         }
       >
         <div className="mobile-product-list">
-          {womenClothing.map((product) => (
+          {filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>

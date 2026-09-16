@@ -4,63 +4,61 @@ import { useEffect, useState } from "react";
 import type { Product } from "../types/Product";
 import CategoryLayout from "../components/CategoryLayout";
 import ProductCard from "../components/ProductCard";
+import FilterSidebar from "../components/FilterSidebar";
 
 function MenWatches() {
   const [menwatch, setMenWatch] = useState<Product[]>([]);
+  const [selectedBrand, setSelectedBrand] = useState("");
+
+  const [selectedMaxPrice, setSelectedMaxPrice] = useState(20000);
 
   useEffect(() => {
     async function getMenWatches() {
       const response = await fetch("https://dummyjson.com/products?limit=0");
       const data = await response.json();
 
-      const menwatch = data.products.filter( 
-        (product: Product) => product.category === "mens-watches",);
+      const menwatch = data.products.filter(
+        (product: Product) => product.category === "mens-watches",
+      );
       setMenWatch(menwatch);
     }
     getMenWatches();
   }, []);
+  const brands = [
+    ...new Set(
+      menwatch
+        .map((product) => product.brand)
+        .filter((brand): brand is string => Boolean(brand)),
+    ),
+  ];
+
+  const filteredProducts = menwatch.filter((product) => {
+    const matchesBrand =
+      selectedBrand === "" || product.brand === selectedBrand;
+
+    const matchesPrice = product.price <= selectedMaxPrice;
+
+    return matchesBrand && matchesPrice;
+  });
 
   return (
     <>
-      {/* <Header /> */}
       <CategoryLayout
         title="Men's Watches"
         filters={
-          <>
-            <h3>Filters</h3>
-
-            <h4>Price</h4>
-
-            <input type="range" min="0" max="100000" />
-
-            <h4>Brand</h4>
-
-            <label>
-              <input type="checkbox" />
-              Rolex
-            </label>
-
-            <label>
-              <input type="checkbox" />
-              Fossil
-            </label>
-
-            <label>
-              <input type="checkbox" />
-              Casio
-            </label>
-
-            <h4>Rating</h4>
-
-            <label>
-              <input type="checkbox" />
-              4★ & above
-            </label>
-          </>
+          <FilterSidebar
+            minPrice={200}
+            maxPrice={2000}
+            brands={brands}
+            selectedBrand={selectedBrand}
+            selectedMaxPrice={selectedMaxPrice}
+            onBrandChange={setSelectedBrand}
+            onPriceChange={setSelectedMaxPrice}
+          />
         }
       >
         <div className="mobile-product-list">
-          {menwatch.map((product) => (
+          {filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>

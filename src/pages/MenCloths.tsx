@@ -1,12 +1,16 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 // import Header from "../components/Header";
 import Footer from "../components/Footer";
 import type { Product } from "../types/Product";
 import CategoryLayout from "../components/CategoryLayout";
 import ProductCard from "../components/ProductCard";
+import FilterSidebar from "../components/FilterSidebar";
 
 function MenCloths() {
   const [mencloth, setMenCloth] = useState<Product[]>([]);
+  const [selectedBrand, setSelectedBrand] = useState("");
+
+  const [selectedMaxPrice, setSelectedMaxPrice] = useState(2000);
 
   useEffect(() => {
     async function GetCloth() {
@@ -19,71 +23,45 @@ function MenCloths() {
     }
     GetCloth();
   }, []);
+  const brands = [
+    ...new Set(
+      mencloth
+        .map((product) => product.brand)
+        .filter((brand): brand is string => Boolean(brand)),
+    ),
+  ];
+
+  const filteredProducts = mencloth.filter((product) => {
+    const matchesBrand =
+      selectedBrand === "" || product.brand === selectedBrand;
+
+    const matchesPrice = product.price <= selectedMaxPrice;
+
+    return matchesBrand && matchesPrice;
+  });
   return (
     <>
       {/* <Header /> */}
       <CategoryLayout
-            title="Men's Clothing"
-            filters={
-                <>
-                    <h3>Filters</h3>
-
-                    <h4>Price</h4>
-
-                    <input
-                        type="range"
-                        min="0"
-                        max="100000"
-                    />
-
-                    <h4>Brand</h4>
-
-                    <label>
-                        <input type="checkbox" />
-                        Nike
-                    </label>
-
-                    <label>
-                        <input type="checkbox" />
-                        Adidas
-                    </label>
-
-                    <label>
-                        <input type="checkbox" />
-                        Puma
-                    </label>
-
-                    <h4>Size</h4>
-
-                    <label>
-                        <input type="checkbox" />
-                        S
-                    </label>
-
-                    <label>
-                        <input type="checkbox" />
-                        M
-                    </label>
-
-                    <label>
-                        <input type="checkbox" />
-                        L
-                    </label>
-                </>
-            }
-        >
-
-            <div className="mobile-product-list">
-
-                {mencloth.map((product) => (
-                    <ProductCard
-                        key={product.id}
-                        product={product}
-                    />
-                ))}
-
-            </div>
-        </CategoryLayout>
+        title="Men's Clothing"
+        filters={
+          <FilterSidebar
+            minPrice={10}
+            maxPrice={30}
+            brands={brands}
+            selectedBrand={selectedBrand}
+            selectedMaxPrice={selectedMaxPrice}
+            onBrandChange={setSelectedBrand}
+            onPriceChange={setSelectedMaxPrice}
+          />
+        }
+      >
+        <div className="mobile-product-list">
+          {filteredProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      </CategoryLayout>
       <Footer />
     </>
   );

@@ -1,108 +1,71 @@
 import CategoryLayout from "../components/CategoryLayout";
-import Footer from "../components/Footer"
+import FilterSidebar from "../components/FilterSidebar";
+import Footer from "../components/Footer";
 // import Header from "../components/Header"
 import ProductCard from "../components/ProductCard";
 import type { Product } from "../types/Product";
 import { useEffect, useState } from "react";
 
-
 function TwoWheelers() {
-    const [ twoWheelers , setTwoWheelers] = useState<Product[]>([]);
+  const [twoWheelers, setTwoWheelers] = useState<Product[]>([]);
+  const [selectedBrand, setSelectedBrand] = useState("");
 
-    useEffect(() => {   
-        async function getTwoWheelers() {
-            const response = await fetch("https://dummyjson.com/products?limit=0");
-            const data = await response.json();
-            const twoWheelers = data.products.filter(
-                (product: Product) => product.category === "motorcycle",
-            );
-            setTwoWheelers(twoWheelers);
-        }
-        getTwoWheelers();
+  const [selectedMaxPrice, setSelectedMaxPrice] = useState(20000);
 
-    }, []);
+  useEffect(() => {
+    async function getTwoWheelers() {
+      const response = await fetch("https://dummyjson.com/products?limit=0");
+      const data = await response.json();
+      const twoWheelers = data.products.filter(
+        (product: Product) => product.category === "motorcycle",
+      );
+      setTwoWheelers(twoWheelers);
+    }
+    getTwoWheelers();
+  }, []);
+  const brands = [
+    ...new Set(
+      twoWheelers
+        .map((product) => product.brand)
+        .filter((brand): brand is string => Boolean(brand)),
+    ),
+  ];
+
+  const filteredProducts = twoWheelers.filter((product) => {
+    const matchesBrand =
+      selectedBrand === "" || product.brand === selectedBrand;
+
+    const matchesPrice = product.price <= selectedMaxPrice;
+
+    return matchesBrand && matchesPrice;
+  });
   return (
     <>
-    {/* <Header/> */}
-    <CategoryLayout
-                title="Two Wheelers"
-                filters={
-                    <>
-                        <h3>Filters</h3>
+      {/* <Header/> */}
+      <CategoryLayout
+        title="Two Wheelers"
+        filters={
+          <FilterSidebar
+            minPrice={2000}
+            maxPrice={20000}
+            brands={brands}
+            selectedBrand={selectedBrand}
+            selectedMaxPrice={selectedMaxPrice}
+            onBrandChange={setSelectedBrand}
+            onPriceChange={setSelectedMaxPrice}
+          />
+        }
+      >
+        <div className="mobile-product-list">
+          {filteredProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      </CategoryLayout>
 
-                        <h4>Price</h4>
-
-                        <input
-                            type="range"
-                            min="0"
-                            max="1000000"
-                        />
-
-                        <h4>Brand</h4>
-
-                        <label>
-                            <input type="checkbox" />
-                            Kawasaki
-                        </label>
-
-                        <label>
-                            <input type="checkbox" />
-                            Ducati
-                        </label>
-
-                        <label>
-                            <input type="checkbox" />
-                            Honda
-                        </label>
-
-                        {/* <h4>Type</h4>
-
-                        <label>
-                            <input type="checkbox" />
-                            Sports Bike
-                        </label>
-
-                        <label>
-                            <input type="checkbox" />
-                            Cruiser
-                        </label>
-
-                        <label>
-                            <input type="checkbox" />
-                            Street Bike
-                        </label> */}
-
-                        <h4>Rating</h4>
-
-                        <label>
-                            <input type="checkbox" />
-                            4★ & above
-                        </label>
-                    </>
-                }
-            >
-
-                <div className="mobile-product-list">
-
-                    {twoWheelers.map((product) => (
-                        <ProductCard
-                            key={product.id}
-                            product={product}
-                        />
-                    ))}
-
-                </div>
-
-            </CategoryLayout>
-
-
-
-
-    <Footer/>
-
+      <Footer />
     </>
-  )
+  );
 }
 
-
-export default TwoWheelers
+export default TwoWheelers;

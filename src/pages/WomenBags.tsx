@@ -4,9 +4,13 @@ import Footer from "../components/Footer";
 // import Header from "../components/Header";
 import type { Product } from "../types/Product";
 import ProductCard from "../components/ProductCard";
+import FilterSidebar from "../components/FilterSidebar";
 
 function WomenBags() {
   const [womenbags, setWomenBags] = useState<Product[]>([]);
+  const [selectedBrand, setSelectedBrand] = useState("");
+
+  const [selectedMaxPrice, setSelectedMaxPrice] = useState(2000);
 
   useEffect(() => {
     async function getWomenBags() {
@@ -20,6 +24,22 @@ function WomenBags() {
     }
     getWomenBags();
   }, []);
+  const brands = [
+    ...new Set(
+      womenbags
+        .map((product) => product.brand)
+        .filter((brand): brand is string => Boolean(brand)),
+    ),
+  ];
+
+  const filteredProducts = womenbags.filter((product) => {
+    const matchesBrand =
+      selectedBrand === "" || product.brand === selectedBrand;
+
+    const matchesPrice = product.price <= selectedMaxPrice;
+
+    return matchesBrand && matchesPrice;
+  });
 
   return (
     <>
@@ -27,41 +47,19 @@ function WomenBags() {
       <CategoryLayout
         title="Women's Bags"
         filters={
-          <>
-            <h3>Filters</h3>
-
-            <h4>Price</h4>
-
-            <input type="range" min="0" max="100000" />
-
-            <h4>Brand</h4>
-
-            <label>
-              <input type="checkbox" />
-              Chanel
-            </label>
-
-            <label>
-              <input type="checkbox" />
-              Gucci
-            </label>
-
-            <label>
-              <input type="checkbox" />
-              Prada
-            </label>
-
-            <h4>Rating</h4>
-
-            <label>
-              <input type="checkbox" />
-              4★ & above
-            </label>
-          </>
+          <FilterSidebar
+            minPrice={0}
+            maxPrice={600}
+            brands={brands}
+            selectedBrand={selectedBrand}
+            selectedMaxPrice={selectedMaxPrice}
+            onBrandChange={setSelectedBrand}
+            onPriceChange={setSelectedMaxPrice}
+          />
         }
       >
         <div className="mobile-product-list">
-          {womenbags.map((product) => (
+          {filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>

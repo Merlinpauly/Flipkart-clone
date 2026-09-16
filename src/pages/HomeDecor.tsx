@@ -4,9 +4,13 @@ import { useEffect, useState } from "react";
 import type { Product } from "../types/Product";
 import CategoryLayout from "../components/CategoryLayout";
 import ProductCard from "../components/ProductCard";
+import FilterSidebar from "../components/FilterSidebar";
 
 function HomeDecor() {
   const [homeDecor, setHomeDecor] = useState<Product[]>([]);
+  const [selectedBrand, setSelectedBrand] = useState("");
+
+  const [selectedMaxPrice, setSelectedMaxPrice] = useState(2000);
 
   useEffect(() => {
     async function getHomeDeccor() {
@@ -19,6 +23,22 @@ function HomeDecor() {
     }
     getHomeDeccor();
   }, []);
+  const brands = [
+    ...new Set(
+      homeDecor
+        .map((product) => product.brand)
+        .filter((brand): brand is string => Boolean(brand)),
+    ),
+  ];
+
+  const filteredProducts = homeDecor.filter((product) => {
+    const matchesBrand =
+      selectedBrand === "" || product.brand === selectedBrand;
+
+    const matchesPrice = product.price <= selectedMaxPrice;
+
+    return matchesBrand && matchesPrice;
+  });
 
   return (
     <>
@@ -26,58 +46,19 @@ function HomeDecor() {
       <CategoryLayout
         title="Home Decor"
         filters={
-          <>
-            <h3>Filters</h3>
-
-            <h4>Price</h4>
-
-            <input type="range" min="0" max="100000" />
-
-            {/* <h4>Category</h4>
-
-            <label>
-              <input type="checkbox" />
-              Wall Decor
-            </label>
-
-            <label>
-              <input type="checkbox" />
-              Lighting
-            </label>
-
-            <label>
-              <input type="checkbox" />
-              Furniture
-            </label>
-
-            <h4>Material</h4>
-
-            <label>
-              <input type="checkbox" />
-              Wood
-            </label>
-
-            <label>
-              <input type="checkbox" />
-              Metal
-            </label>
-
-            <label>
-              <input type="checkbox" />
-              Glass
-            </label> */}
-
-            <h4>Rating</h4>
-
-            <label>
-              <input type="checkbox" />
-              4★ & above
-            </label>
-          </>
+          <FilterSidebar
+            minPrice={20}
+            maxPrice={60}
+            brands={brands}
+            selectedBrand={selectedBrand}
+            selectedMaxPrice={selectedMaxPrice}
+            onBrandChange={setSelectedBrand}
+            onPriceChange={setSelectedMaxPrice}
+          />
         }
       >
         <div className="mobile-product-list">
-          {homeDecor.map((product) => (
+          {filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>

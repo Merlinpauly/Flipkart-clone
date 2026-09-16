@@ -5,9 +5,13 @@ import { useState, useEffect } from "react";
 import type { Product } from "../types/Product";
 import CategoryLayout from "../components/CategoryLayout";
 import ProductCard from "../components/ProductCard";
+import FilterSidebar from "../components/FilterSidebar";
 
 function Laptop() {
   const [laptop, setLaptop] = useState<Product[]>([]);
+  const [selectedBrand, setSelectedBrand] = useState("");
+
+  const [selectedMaxPrice, setSelectedMaxPrice] = useState(20000);
 
   useEffect(() => {
     async function getLaptop() {
@@ -23,50 +27,42 @@ function Laptop() {
     getLaptop();
   }, []);
 
+  const brands = [
+    ...new Set(
+      laptop
+        .map((product) => product.brand)
+        .filter((brand): brand is string => Boolean(brand)),
+    ),
+  ];
+
+  const filteredProducts = laptop.filter((product) => {
+    const matchesBrand =
+      selectedBrand === "" || product.brand === selectedBrand;
+
+    const matchesPrice = product.price <= selectedMaxPrice;
+
+    return matchesBrand && matchesPrice;
+  });
+
   return (
     <>
       {/* <Header /> */}
       <CategoryLayout
         title="Laptops"
         filters={
-          <>
-            <h3>Filters</h3>
-
-            <h4>Price</h4>
-            <input type="range" min="0" max="100000" />
-
-            <h4>Brand</h4>
-
-            <label>
-              <input type="checkbox" />
-              Apple
-            </label>
-
-            <label>
-              <input type="checkbox" />
-              Dell
-            </label>
-
-            <label>
-              <input type="checkbox" />
-              Lenovo
-            </label>
-
-            <h4>RAM</h4>
-
-            <label>
-              <input type="checkbox" />8 GB
-            </label>
-
-            <label>
-              <input type="checkbox" />
-              16 GB
-            </label>
-          </>
+          <FilterSidebar
+            minPrice={1000}
+            maxPrice={2000}
+            brands={brands}
+            selectedBrand={selectedBrand}
+            selectedMaxPrice={selectedMaxPrice}
+            onBrandChange={setSelectedBrand}
+            onPriceChange={setSelectedMaxPrice}
+          />
         }
       >
         <div className="mobile-product-list">
-          {laptop.map((product) => (
+          {filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>

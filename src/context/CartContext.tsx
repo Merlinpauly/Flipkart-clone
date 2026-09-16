@@ -1,17 +1,27 @@
-import { createContext, useState } from "react";
+import  { createContext , useState } from "react";
+
+import type { Dispatch , ReactNode , SetStateAction } from "react";
 import type { Product } from "../types/Product";
 
-const CartContext = createContext(null);
+interface CartContextType {
+  cart : Product[]; 
+  setCart : Dispatch<SetStateAction<Product[]>>;
 
-function CartProvider() {
-  const [cart, setCart] = useState<Product[]>([]);
+}
+const CartContext = createContext<CartContextType | null>(null);
+
+function CartProvider( { children } : { children : ReactNode}){
+
+  const [ cart , setCart ] = useState<Product[]>([]);
 
   return(
-    <></>
-    // <CartContext.Provider value={{ cart, setCart }}>
-        
-    //     </CartContext.Provider>
-  )
+    <CartContext.Provider value={{ cart , setCart}}>
+      {children}
+      
+
+    </CartContext.Provider>
+  );
+
 }
 
-export { CartContext, CartProvider }; 
+export { CartContext, createContext, CartProvider };

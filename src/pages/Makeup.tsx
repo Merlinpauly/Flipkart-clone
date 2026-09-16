@@ -1,4 +1,5 @@
 import CategoryLayout from "../components/CategoryLayout";
+import FilterSidebar from "../components/FilterSidebar";
 import Footer from "../components/Footer";
 // import Header from "../components/Header";
 import ProductCard from "../components/ProductCard";
@@ -7,6 +8,9 @@ import { useEffect, useState } from "react";
 
 function Makeup() {
   const [makeup, setMakeup] = useState<Product[]>([]);
+  const [selectedBrand, setSelectedBrand] = useState("");
+
+  const [selectedMaxPrice, setSelectedMaxPrice] = useState(2000);
 
   useEffect(() => {
     async function getMakeup() {
@@ -20,6 +24,22 @@ function Makeup() {
     }
     getMakeup();
   }, []);
+  const brands = [
+    ...new Set(
+      makeup
+        .map((product) => product.brand)
+        .filter((brand): brand is string => Boolean(brand)),
+    ),
+  ];
+
+  const filteredProducts = makeup.filter((product) => {
+    const matchesBrand =
+      selectedBrand === "" || product.brand === selectedBrand;
+
+    const matchesPrice = product.price <= selectedMaxPrice;
+
+    return matchesBrand && matchesPrice;
+  });
 
   return (
     <>
@@ -27,58 +47,19 @@ function Makeup() {
       <CategoryLayout
         title="Makeup"
         filters={
-          <>
-            <h3>Filters</h3>
-
-            <h4>Price</h4>
-
-            <input type="range" min="0" max="100000" />
-
-            <h4>Brand</h4>
-
-            <label>
-              <input type="checkbox" />
-              Essence
-            </label>
-
-            <label>
-              <input type="checkbox" />
-              Maybelline
-            </label>
-
-            <label>
-              <input type="checkbox" />
-              L'Oréal
-            </label>
-
-            <h4>Category</h4>
-
-            <label>
-              <input type="checkbox" />
-              Lipstick
-            </label>
-
-            <label>
-              <input type="checkbox" />
-              Foundation
-            </label>
-
-            <label>
-              <input type="checkbox" />
-              Eyeshadow
-            </label>
-
-            <h4>Rating</h4>
-
-            <label>
-              <input type="checkbox" />
-              4★ & above
-            </label>
-          </>
+          <FilterSidebar
+            minPrice={5}
+            maxPrice={20}
+            brands={brands}
+            selectedBrand={selectedBrand}
+            selectedMaxPrice={selectedMaxPrice}
+            onBrandChange={setSelectedBrand}
+            onPriceChange={setSelectedMaxPrice}
+          />
         }
       >
         <div className="mobile-product-list">
-          {makeup.map((product) => (
+          {filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>

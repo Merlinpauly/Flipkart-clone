@@ -1,4 +1,5 @@
 import CategoryLayout from "../components/CategoryLayout";
+import FilterSidebar from "../components/FilterSidebar";
 import Footer from "../components/Footer";
 
 import ProductCard from "../components/ProductCard";
@@ -7,6 +8,10 @@ import { useEffect, useState } from "react";
 
 function Furniture() {
   const [furniture, setFurniture] = useState<Product[]>([]);
+
+  const [selectedBrand, setSelectedBrand] = useState("");
+
+  const [selectedMaxPrice, setSelectedMaxPrice] = useState(20000);
 
   useEffect(() => {
     async function getFurniture() {
@@ -19,61 +24,41 @@ function Furniture() {
     }
     getFurniture();
   }, []);
+  const brands = [
+    ...new Set(
+      furniture
+        .map((product) => product.brand)
+        .filter((brand): brand is string => Boolean(brand)),
+    ),
+  ];
+
+  const filteredProducts = furniture.filter((product) => {
+    const matchesBrand =
+      selectedBrand === "" || product.brand === selectedBrand;
+
+    const matchesPrice = product.price <= selectedMaxPrice;
+
+    return matchesBrand && matchesPrice;
+  });
 
   return (
     <>
-     
-
       <CategoryLayout
         title="Furniture"
         filters={
-          <>
-            <h3>Filters</h3>
-
-            <h4>Price</h4>
-
-            <input type="range" min="0" max="100000" />
-
-            <h4>Category</h4>
-
-            <label>
-              <input type="checkbox" />
-              Beds
-            </label>
-
-            <label>
-              <input type="checkbox" />
-              Sofas
-            </label>
-
-            <label>
-              <input type="checkbox" />
-              Tables
-            </label>
-
-            <h4>Material</h4>
-
-            <label>
-              <input type="checkbox" />
-              Wood
-            </label>
-
-            <label>
-              <input type="checkbox" />
-              Metal
-            </label>
-
-            <h4>Rating</h4>
-
-            <label>
-              <input type="checkbox" />
-              4★ & above
-            </label>
-          </>
+          <FilterSidebar
+            minPrice={200}
+            maxPrice={2000}
+            brands={brands}
+            selectedBrand={selectedBrand}
+            selectedMaxPrice={selectedMaxPrice}
+            onBrandChange={setSelectedBrand}
+            onPriceChange={setSelectedMaxPrice}
+          />
         }
       >
         <div className="mobile-product-list">
-          {furniture.map((product) => (
+          {filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>

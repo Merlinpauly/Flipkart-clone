@@ -1,24 +1,44 @@
 import type { Product } from "../types/Product";
 import "../styles/index.css";
 import { Link } from "react-router-dom";
+import { CartContext  } from "../context/CartContext";
+import {  useContext } from "react";
 
 interface ProductCardProps {
   product: Product;
 }
 // this interface means , the productcard receives props called product , that product follow the Product rules means type check
 function ProductCard({ product }: ProductCardProps) {
+  const cartContext = useContext(CartContext);
+
+  // console.log(cartContext);
+
+  if(!cartContext){
+    return null;
+  }
+  
+
+  const { cart , setCart } = cartContext;
+
+  function handleAddToCart(){
+    setCart([...cart, product]);
+    // console.log("Added to cart:", product.title);
+  }
+
   return (
+    <div className="product-card">
     <Link to={`/product/${product.id}`} className="product-card-link">
-      <div className="product-card">
+      
         <img src={product.thumbnail} alt={product.title} />
         <h3>{product.title}</h3>
         <p>${product.price}</p>
         <span>⭐ {product.rating}</span>
         <br />
         <small>{product.discountPercentage}% off</small>
-        <button className="add-cart-btn">Add to Cart</button>
+        </Link>
+        <button className="add-cart-btn" onClick={handleAddToCart} >Add to Cart</button>
       </div>
-    </Link>
+    
   );
 }
 export default ProductCard;
