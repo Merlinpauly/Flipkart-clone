@@ -1,5 +1,6 @@
 import type { Dispatch, SetStateAction } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
   search: string;
@@ -7,9 +8,17 @@ interface HeaderProps {
 }
 
 function Header({ search, setSearch }: HeaderProps) {
+  const navigate = useNavigate();
+
+  function handleHome(){
+    navigate("/")
+
+  }
   return (
     <header className="header">
-      <div className="logo">Flipkart</div>
+      <div className="logo"  onClick={handleHome}>
+        <img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/fk-mp-c815b6.svg" alt="logo" />
+      </div>
 
       <div className="search-container">
         <input
@@ -30,6 +39,7 @@ function Header({ search, setSearch }: HeaderProps) {
       </button>
 
       <div className="cart">
+        <span className="toggle-circle">1</span>
         <Link to="/cart">🛒 Cart</Link>
       </div>
     </header>

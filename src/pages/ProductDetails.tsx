@@ -53,9 +53,12 @@ function ProductDetails() {
               <p>Brand: {product.brand}</p>
 
               <p>Reviews: {product.reviews.length}</p>
-              <button className="add-to-cart" onClick={addToCart}>
-                🛒 Add to Cart
-              </button>
+              <div className="cart-buy-btn">
+                <button className="add-to-cart" onClick={addToCart}>
+                  🛒 Add to Cart
+                </button>
+                <button className="buy-now">Buy Now</button>
+              </div>
             </div>
           </>
         )}

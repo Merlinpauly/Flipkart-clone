@@ -23,6 +23,8 @@ import SportsAccessories from "./pages/SportsAccessories";
 import TwoWheelers from "./pages/TwoWheelers";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
+import BigBillion from "./pages/BigBillion";
+
 
 function App() {
   const [search, setSearch] = useState("");
@@ -53,6 +55,8 @@ function App() {
           <Route path="/two-wheelers" element={<TwoWheelers />} />
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/big-billion" element={<BigBillion />} />
+          
         </Routes>
       </BrowserRouter>
     </>

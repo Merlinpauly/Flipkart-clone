@@ -13,19 +13,20 @@ body {
   align-items: center;
   gap: 25px;
   padding: 12px 40px;
-  background-color: #2874f0;
-  
-    position: sticky;
-    top: 0;
-    z-index: 1000;
 
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid #d6d6d6;
+  background-color: white;
 }
 
 .logo {
-  color: white;
-  font-size: 28px;
-  font-weight: bold;
-  
+  color: #2874f0;
+  border-radius: 12px;
+  background-color: #ffe51f;
+  min-width: fit-content;
+  padding: 6px 14.5px;
 }
 
 .search-container {
@@ -37,13 +38,13 @@ body {
   padding: 12px;
   border: none;
   outline: none;
-  border-radius: 2px;
+  border-radius: 12px;
+  border: 2px solid #2ea1ff;
 }
 
 .login-button {
-  padding: 10px 30px;
-  border: none;
-  background-color: white;
+  padding: 10px 25px;
+  border: solid 1px #2874f0;
   color: #2874f0;
   font-weight: bold;
   cursor: pointer;
@@ -55,7 +56,7 @@ body {
 }
 
 .cart a {
-  color: white;
+  color: black;
   text-decoration: none;
   font-size: 16px;
   font-weight: 500;
@@ -66,6 +67,17 @@ body {
 .cart a:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
+.toggle-circle {
+  background-color: rgb(227, 18, 46);
+  color: rgb(255, 255, 255);
+  border-radius: 50%;
+  bottom: 35px;
+  height: 17px;
+  position: absolute;
+  text-align: center;
+  width: 15px;
+  right: 80px;
+}
 /* categoryNav */
 
 .category-nav {
@@ -75,7 +87,6 @@ body {
   padding: 15px 30px;
   background-color: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  
 }
 
 .category-item {
@@ -329,7 +340,7 @@ body {
 .footer-section h4 {
   margin-bottom: 15px;
   font-size: 14px;
-  color:#878787
+  color: #878787;
 }
 
 .footer-section p {
@@ -515,16 +526,28 @@ body {
 .product-info p {
   margin: 12px 0;
 }
+.cart-buy-btn {
+  gap: 30px;
+  display: flex;
+}
 .add-to-cart {
   margin-top: 20px;
   padding: 12px 30px;
-  border: none;
+  border: 1px solid;
   border-radius: 4px;
-  background-color: #ff9f00;
-  color: white;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
+}
+.buy-now {
+  margin-top: 20px;
+  padding: 12px 30px;
+  border: 1px solid;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(90deg, rgb(255, 229, 31), rgb(255, 205, 3));
 }
 
 .add-to-cart:hover {
@@ -819,13 +842,29 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .banner-image img {
   width: 100%;
-  max-width:  515px;
+  max-width: 515px;
   height: 250px;
 
   object-fit: cover;
   border-radius: 8px;
+}
+
+.bigbillion-first-image {
+  display: flex;
+  position: relative;
+  width: 1200px;
+  height: 853.3333333333334px;
+  margin: 0 auto;
+}
+
+.bigbillion-first-image img {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  object-fit: cover;
 }
