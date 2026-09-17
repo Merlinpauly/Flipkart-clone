@@ -97,7 +97,7 @@ body {
 }
 
 /* banner */
-.hero-banner {
+/* .hero-banner {
   min-height: 350px;
   margin: 20px;
   border-radius: 8px;
@@ -113,12 +113,12 @@ body {
 
 .banner-content {
   text-align: center;
-}
+} */
 /* .hero-banner img {
     min-height: 350px;
 } */
 
-.banner-content h1 {
+/* .banner-content h1 {
   font-size: 42px;
   margin-bottom: 15px;
 }
@@ -138,7 +138,7 @@ body {
 
   font-weight: bold;
   cursor: pointer;
-}
+} */
 
 /* ProductCard */
 
@@ -733,4 +733,99 @@ body {
 
 .brand-options input[type="radio"] {
   cursor: pointer;
+}
+
+.hero-banner {
+  width: 100%;
+  min-height: 320px;
+  margin: 20px 0;
+  padding: 35px 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+
+  background: linear-gradient(110deg, #2874f0, #1555c0);
+  border-radius: 8px;
+  overflow: hidden;
+
+  color: white;
+}
+
+/* Left side content */
+
+.banner-content {
+  flex: 1;
+  max-width: 550px;
+}
+
+.banner-small-text {
+  margin-bottom: 12px;
+
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #ffe500;
+}
+
+.banner-content h1 {
+  margin-bottom: 15px;
+
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.banner-content h1 span {
+  color: #ffe500;
+}
+
+.banner-description {
+  margin-bottom: 25px;
+
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+/* Button */
+
+.shop-now-btn {
+  padding: 13px 28px;
+
+  border: none;
+  border-radius: 4px;
+
+  background-color: #ffe500;
+  color: #172337;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.shop-now-btn:hover {
+  background-color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Right side image */
+
+.banner-image {
+  flex: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner-image img {
+  width: 100%;
+  max-width:  515px;
+  height: 250px;
+
+  object-fit: cover;
+  border-radius: 8px;
 }
