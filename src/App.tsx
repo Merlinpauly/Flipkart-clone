@@ -24,6 +24,7 @@ import TwoWheelers from "./pages/TwoWheelers";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import BigBillion from "./pages/BigBillion";
+import Profile from "./pages/Profile";
 
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/big-billion" element={<BigBillion />} />
+          <Route path="/profile" element={<Profile />} />
           
         </Routes>
       </BrowserRouter>

@@ -1,14 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import type { Product } from "../types/Product";
 // import Header from "../components/Header";
 import Footer from "../components/Footer";
-
+import { CartContext } from "../context/CartContext";
+import { useNavigate } from "react-router-dom";
 function ProductDetails() {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const cartContext = useContext(CartContext);
 
   const [product, setProduct] = useState<Product | null>(null);
-  const [cart, setCart] = useState<Product[]>([]);
+  // const [cart, setCart] = useState<Product[]>([]);
+
+  if (!cartContext) {
+    return null;
+  }
+
+  const { cart, setCart } = cartContext;
 
   useEffect(() => {
     async function getProduct() {
@@ -22,10 +31,11 @@ function ProductDetails() {
     getProduct();
   }, [id]);
 
-  console.log(product);
   const addToCart = () => {
     if (product) {
       setCart([...cart, product]);
+
+      navigate("/cart");
     }
   };
 

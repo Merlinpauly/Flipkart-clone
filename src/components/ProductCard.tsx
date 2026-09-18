@@ -35,11 +35,11 @@ function ProductCard({ product }: ProductCardProps) {
         <img src={product.thumbnail} alt={product.title} />
         <h3>{product.title}</h3>
         <p>${product.price}</p>
-        <span>⭐ {product.rating}</span>
+        {/* <span>⭐ {product.rating}</span> */}
         <br />
         <small>{product.discountPercentage}% off</small>
         </Link>
-        <button className="add-cart-btn" onClick={handleAddToCart} >Add to Cart</button>
+        {/* <button className="add-cart-btn" onClick={handleAddToCart} >Add to Cart</button> */}
       </div>
     
   );
