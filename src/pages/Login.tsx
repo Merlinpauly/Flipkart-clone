@@ -9,7 +9,17 @@ function Login() {
   const [password, setPassword] = useState("");
   function handleSubmit(event: any) {
     event.preventDefault();
-    console.log("submitted");
+    const storedUsers = localStorage.getItem("users");
+    // console.log(storedUsers);
+    const users = JSON.parse(storedUsers!);
+    const foundUser = users.find((user: any) => user.mobile === mobile  && user.password === password);
+    // console.log(foundUser);
+
+    if(foundUser){
+      console.log("Login Sucessfully"); 
+    }else{
+      console.log("Invalid mobile and password");
+    }
   }
   return (
     <>

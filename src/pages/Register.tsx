@@ -2,6 +2,7 @@ import { useState } from "react";
 // import Header from "../components/Header";
 import CategoryNav from "../components/CategoryNav";
 import Footer from "../components/Footer";
+import users from "../data/users.json";
 
 
 function Register() {
@@ -10,13 +11,35 @@ function Register() {
   const [password, setPassword] = useState("");
   function handleSubmit(event:any){
     event.preventDefault();
-    console.log("account created");
+
+    const newUser ={
+      id: Date.now(),
+      name: name,
+      mobile:mobile,
+      password:password,
+    };
+    const storedUsers = localStorage.getItem("users");
+    // console.log(storedUsers);
+    const users = storedUsers ? JSON.parse(storedUsers):[];
+    users.push(newUser);
+     localStorage.setItem("users", JSON.stringify(users));
+    console.log(users);
+    // localStorage.setItem("users" , JSON.stringify(newUser));
+    
+    // const userObject = JSON.parse(storedUsers!);
+    // console.log(userObject);
+    // console.log(typeof userObject)
+    
+    // console.log(typeof storedUser);
+    // console.log(localStorage.getItem("user"));
+    // console.log(newUser);
+    // console.log("account created");
 
   }
   return (
     <>
         {/* <Header/> */}
-        <CategoryNav/>
+        <CategoryNav />
         <div className="register-page">
       <form className= "register-form" onSubmit={handleSubmit} >
 
@@ -32,7 +55,7 @@ function Register() {
       </form>
       
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }
