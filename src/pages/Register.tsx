@@ -2,7 +2,7 @@ import { useState } from "react";
 // import Header from "../components/Header";
 import CategoryNav from "../components/CategoryNav";
 import Footer from "../components/Footer";
-import users from "../data/users.json";
+
 import { useNavigate } from "react-router-dom";
 
 function Register() {
