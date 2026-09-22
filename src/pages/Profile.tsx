@@ -1,6 +1,7 @@
-import React from "react";
-
 function Profile() {
+  const storedUser = localStorage.getItem("loggedInUser");
+  const user = JSON.parse(storedUser!);
+
   return (
     <div className="profile-page">
       <h1>My Profile</h1>
@@ -8,11 +9,8 @@ function Profile() {
       <div className="profile-card">
         <div className="profile-avatar">👤</div>
 
-        <h2>Merlin</h2>
-
-        <p>Email: merlin@example.com</p>
-
-        <p>Phone: +91 XXXXX XXXXX</p>
+        <h2>Name : {user.name}</h2>
+        <p>Mobile : {user.mobile}</p>
       </div>
     </div>
   );

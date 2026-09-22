@@ -942,19 +942,13 @@ body {
   z-index: 1000;
 }
 
-
-
 .profile:hover .profile-dropdown {
   display: flex;
 }
 
-
-
 .profile:hover .profile-arrow {
   transform: rotate(180deg);
 }
-
-
 
 .profile-dropdown button {
   width: 100%;
@@ -995,10 +989,10 @@ body {
 .profile-card {
   max-width: 450px;
   padding: 30px;
-
   background-color: white;
   border-radius: 8px;
   text-align: center;
+  margin: auto;
 }
 
 .profile-avatar {
@@ -1013,4 +1007,25 @@ body {
 .profile-card p {
   margin: 10px 0;
   color: #555;
+}
+.password-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input input {
+  width: 100%;
+  padding-right: 45px;
+}
+
+.password-input button {
+  position: absolute;
+  right: 3%;
+  top: 0px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+  width: 10%;
 }

@@ -13,6 +13,11 @@ function Header({ search, setSearch }: HeaderProps) {
   function handleHome() {
     navigate("/");
   }
+  function handleLogout() {
+    alert("Logout Successfully");
+    localStorage.removeItem("loggedInUser");
+    navigate("/login");
+  }
 
   // function handleProfileChange(event: React.ChangeEvent<HTMLSelectElement>) {
   //   const selectedValue = event.target.value;
@@ -79,7 +84,7 @@ function Header({ search, setSearch }: HeaderProps) {
 
           <button onClick={() => navigate("/settings")}>Settings</button>
 
-          <button onClick={() => console.log("Logout clicked")}>Log out</button>
+          <button onClick={handleLogout}>Log out</button>
         </div>
       </div>
 

@@ -25,6 +25,8 @@ import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import BigBillion from "./pages/BigBillion";
 import Profile from "./pages/Profile";
+import Settings from "./pages/Settings";
+import Logout from "./pages/Logout";
 
 
 function App() {
@@ -58,6 +60,8 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/big-billion" element={<BigBillion />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/settings" element={<Settings/>}/>
+          <Route path="/logout" element={<Logout/>}/>
           
         </Routes>
       </BrowserRouter>
